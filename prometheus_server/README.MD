@@ -8,4 +8,8 @@
 Для проверки работы:
 - curl "http://localhost:1702/predict?x=1&y=2"
 
+Метрики:
+- "http://localhost:1702/metrics"
 
+Promethus server
+- "http://localhost:9090/"

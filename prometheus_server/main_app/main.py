@@ -9,7 +9,6 @@ from prometheus_client import Counter
 app = FastAPI()
 
 
-
 # инициализируем и запускаем экпортёр метрик
 instrumentator = Instrumentator()
 instrumentator.instrument(app).expose(app)
