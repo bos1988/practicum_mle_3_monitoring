@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 from fastapi.responses import PlainTextResponse
-from prometheus_fastapi_instrumentator import Instrumentator
-import numpy as np
 from prometheus_client import Histogram
 from prometheus_client import Counter
+from prometheus_fastapi_instrumentator import Instrumentator
+import numpy as np
 
 # создание экземпляра FastAPI приложения
 app = FastAPI()
@@ -12,15 +12,17 @@ app = FastAPI()
 instrumentator = Instrumentator()
 instrumentator.instrument(app).expose(app)
 
+# main_app_predictions — объект метрики
 main_app_predictions = Histogram(
     # имя метрики
     "main_app_predictions",
-    #описание метрики
+    # описание метрики
     "Histogram of predictions",
-    #указаываем корзины для гистограммы
+    # указываем корзины для гистограммы
     buckets=(1, 2, 4, 5, 10)
 )
 
+# Счетчик положительных предсказаний
 main_app_counter_pos = Counter("main_app_counter_pos", "Count of positive predictions")
 
 # предсказания
@@ -28,8 +30,9 @@ main_app_counter_pos = Counter("main_app_counter_pos", "Count of positive predic
 def predict(x: int, y: int):
     np.random.seed(int(abs(x)))
     prediction = x+y + np.random.normal(0,1)
+
     main_app_predictions.observe(prediction)
     if prediction > 0:
         main_app_counter_pos.inc()
-    
+
     return {'prediction': prediction}

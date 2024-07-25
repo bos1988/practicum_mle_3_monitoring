@@ -10,11 +10,11 @@ scrape_configs:
   # имя сборщика
   - job_name: 'scrapping-main-app'
 
-    # c какой страницы собиарть метрики?
+    # c какой страницы собирать метрики?
     metrics_path: /metrics
     scheme: http
     
     static_configs:
     - targets:
-      # указывается адресс микросервиса
+      # указывается адрес микросервиса
       - fastapi_app:1702

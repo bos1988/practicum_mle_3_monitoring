@@ -9,9 +9,10 @@ services:
     # перенаправялем порты
     ports:
       - "${MAIN_APP_PORT}:${MAIN_APP_PORT}"
+
     hostname: fastapi_app
 
-
+  # описание сервиса Prometheus:
   prometheus:
     image: prom/prometheus
     command:

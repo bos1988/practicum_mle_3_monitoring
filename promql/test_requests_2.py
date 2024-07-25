@@ -2,6 +2,7 @@ import requests
 import time
 
 for i in range(40):
+    print(f"response {i}")
     params = {
         'x': str(i),
         'y': '-16',
